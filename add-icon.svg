@@ -1,0 +1,8 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+	<style>
+		.s0 { fill: none;stroke: #ffffff;stroke-miterlimit:100;stroke-width: 15 } 
+		.s1 { fill: #ffffff;stroke: #ffffff;stroke-miterlimit:100;stroke-width: 15 } 
+	</style>
+	<path id="Ciircle" class="s0" d="m127.5 237.6c-60.9 0-110.1-49.2-110.1-110.1 0-60.9 49.2-110.1 110.1-110.1 60.9 0 110.1 49.2 110.1 110.1 0 60.9-49.2 110.1-110.1 110.1z"/>
+	<path id="List copy" class="s1" d="m125.5 65.2h5v126.2h-5zm65.6 60.7v5h-126.2v-5z"/>
+</svg>
