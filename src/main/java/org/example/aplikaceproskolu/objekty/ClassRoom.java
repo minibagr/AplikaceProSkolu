@@ -15,5 +15,7 @@ public class ClassRoom {
     public UUID id;
 
     @Column(name = "name")
-    public String Name;
+    public String name;
+
+    public ClassRoom() {}
 }

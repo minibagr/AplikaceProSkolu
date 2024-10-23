@@ -1,59 +1,29 @@
 let problemForm = document.getElementById("add-problem")
-let title = document.getElementById("title")
 
-// let problem = {
-//     title: document.getElementById("title"),
-//     description: document.getElementById("description"),
-// }
+
+let problem = {
+    title: document.getElementById("title"),
+    description: document.getElementById("description"),
+}
 
 problemForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    // for (let input of problem) {
-    //     input.textContent = ""
-    // }
+    console.log(document.getElementById("title").value)
 
-    // $.ajax({
-    //     type: "POST",
-    //     url: document.location,
-    //     body: {
-    //         "name": problem.title,
-    //         "core": null,
-    //         "comment": problem.description,
-    //         "created": null,
-    //         "started": null,
-    //         "ended": null,
-    //     },
-    //     headers: {
-    //         "Content-Typ"
-    //     }
-    // })
-
-    fetch(document.location, {
+    fetch(document.location.href, {
         method: "POST",
-        body: JSON.stringify({
-            "name": title.textContent,
-            "core": null,
-            "comment": "problem.description.textContent",
-            "created": null,
-            "started": null,
-            "ended": null,
-        }),
         headers: {
             "Content-Type": "application/json"
-        }
+        },
+        body: JSON.stringify({
+            "name": problem.title.value,
+            "comment": problem.description.value,
+            "classId": "Alfa",
+        }),
     })
 
-    // var xhr = new XMLHttpRequest()
-    // xhr.open("POST", document.location, true)
-    // xhr.setRequestHeader("Content-Type", "application/json")
-    // var data = JSON.stringify({
-    //     "name": problem.title,
-    //     "core": null,
-    //     "comment": problem.description,
-    //     "created": null,
-    //     "started": null,
-    //     "ended": null,
-    // })
-    // xhr.send(data)
+    for (const [key, value] of Object.entries(problem)) {
+        value.textContent = ""
+    }
 })

@@ -2,6 +2,7 @@ package org.example.aplikaceproskolu.objekty;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.example.aplikaceproskolu.repo.ClassRoomRepo;
 
 import java.util.Date;
 import java.util.UUID;
@@ -23,8 +24,9 @@ public class Problem {
     @JoinColumn(name = "user_id", nullable = true)
     public User userId;
 
-    @Column(name = "core_problem")
-    public String core;
+    @ManyToOne()
+    @JoinColumn(name = "class_id", nullable = true)
+    public ClassRoom classId;
 
     @Column(name = "comment")
     public String comment;
