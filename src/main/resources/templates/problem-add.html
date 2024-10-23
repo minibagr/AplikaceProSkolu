@@ -1,0 +1,41 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <title>Document</title>
+</head>
+<body>
+    <nav>
+        <div class="button">
+            <a>
+                <img loading="lazy" decoding="async" src="/profile-icon.svg">
+            </a>
+        </div>
+        <div class="button selected-tab">
+            <a th:href="@{../problem-add}">
+                <img loading="lazy" decoding="async" src="/add-icon.svg">
+            </a>    
+        </div>
+        <div class="button">
+            <a th:href="@{../}">
+                <img loading="lazy" decoding="async" src="/problem-icon-svg.svg">
+            </a>
+        </div>
+        <div class="button">
+            <a th:href="@{../account/${user.id}}">
+                <img loading="lazy" decoding="async" src="/profile-icon.svg">
+            </a>
+        </div>
+    </nav>
+    <main>
+        <form id="add-problem">
+            <input id="title" placeholder="Problem Title..." maxlength="60" required></input>
+            <textarea id="description" placeholder="Description" maxlength="256" required></textarea>
+            <button type="submit">Send</button>
+        </form>
+    </main>
+
+    <script src="/problemAdd.js"></script>
+</body>
+</html>

@@ -17,23 +17,25 @@ public class Problem {
     public UUID ID;
 
     @Column(name = "problem_name")
-    public String Name;
+    public String name;
 
     @ManyToOne()
-    @JoinColumn(name = "user_id", nullable = false)
-    public User UserId;
+    @JoinColumn(name = "user_id", nullable = true)
+    public User userId;
 
     @Column(name = "core_problem")
-    public String Core;
+    public String core;
 
-    @Column(name = "coment")
-    public String Coment;
+    @Column(name = "comment")
+    public String comment;
 
     @Column(name = "created")
-    public Date Created;
+    public Date created;
     @Column(name = "started")
-    public Date Started;
+    public Date started;
     @Column(name = "ended")
-    public Date Ended;
+    public Date ended;
+
+    public Problem() {}
 
 }

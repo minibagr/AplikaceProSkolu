@@ -13,15 +13,17 @@ public class User {
     @Id
     @Column(name = "user_id",unique = true)
     @GeneratedValue(strategy = GenerationType.AUTO  )
-    public UUID ID;
+    public UUID id;
 
-    @OneToMany(mappedBy = "UserId")
-    public Set<Problem> Problems;
+    @OneToMany(mappedBy = "userId")
+    public Set<Problem> problems;
 
     @Column(name = "name")
-    public String Name;
+    public String name;
 
     @Column(name = "email")
-    public String Email;
+    public String email;
+
+    public User() {}
 
 }
