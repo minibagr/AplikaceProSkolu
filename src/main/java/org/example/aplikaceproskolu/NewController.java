@@ -1,11 +1,14 @@
 package org.example.aplikaceproskolu;
 
+import org.example.aplikaceproskolu.objekty.Problem;
 import org.example.aplikaceproskolu.objekty.User;
+import org.example.aplikaceproskolu.repo.ClassRoomRepo;
 import org.example.aplikaceproskolu.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -16,6 +19,9 @@ import java.util.UUID;
 public class NewController {
     @Autowired
     UserRepo userRepo;
+
+    @Autowired
+    ClassRoomRepo classroomRepo;
 
     @GetMapping("/")
     public String index() {
@@ -34,7 +40,9 @@ public class NewController {
     }
 
     @GetMapping("/problem-add")
-    public String problemAdd() {
+    public String problemAdd(Model model) {
+        model.addAttribute("classes", classroomRepo.findAll());
+        model.addAttribute("problem", new Problem());
         return "problem-add";
     }
 

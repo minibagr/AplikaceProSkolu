@@ -30,15 +30,18 @@ public class DatabaseRestController {
     }
 
     @PostMapping("/problem-add")
-    public Problem addProblem(@RequestBody Map<String, Object> payload) {
-        Problem problem = new Problem();
-        ClassRoom classRoom = classRepo.findByName(payload.get("classId").toString());
+    public Problem addProblem(@ModelAttribute Problem problem) {
+//        Problem problem = new Problem();
+//        ClassRoom classRoom = classRepo.findByName(payload.get("classId").toString());
+//
+//        problem.name = (String) payload.get("name");
+//        problem.comment = (String) payload.get("comment");
+//        problem.classId = classRoom;
 
-        problem.name = (String) payload.get("name");
-        problem.comment = (String) payload.get("comment");
-        problem.classId = classRoom;
+        System.out.println(problem.classId);
+        System.out.println(problem.comment);
+
         problem.created = new Date();
-
         return problemRepo.save(problem);
     }
 

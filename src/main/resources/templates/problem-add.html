@@ -29,9 +29,12 @@
         </div>
     </nav>
     <main>
-        <form id="add-problem">
-            <input id="title" placeholder="Problem Title..." maxlength="60" required />
-            <textarea id="description" placeholder="Description" maxlength="256" required></textarea>
+        <form id="add-problem" action="/problem-add" th:action="@{/problem-add}" th:object="${problem}" method="post">
+            <input id="title" placeholder="Problem Title..." maxlength="60" required th:field="*{name}"/>
+            <select th:field="*{classId}">
+                <option th:each="class : ${classes}" th:text="${class.name}" th:value="${class}"></option>
+            </select>
+            <textarea id="description" placeholder="Description" maxlength="256" required th:field="*{userId}"></textarea>
             <button type="submit">Send</button>
         </form>
     </main>
