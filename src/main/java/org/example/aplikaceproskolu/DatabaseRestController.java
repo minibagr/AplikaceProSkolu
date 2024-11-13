@@ -10,6 +10,7 @@ import org.example.aplikaceproskolu.repo.ClassRoomRepo;
 import org.example.aplikaceproskolu.repo.ProblemRepo;
 import org.example.aplikaceproskolu.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -43,23 +44,23 @@ public class DatabaseRestController {
         httpResponse.sendRedirect("/");
     }
 
-    @GetMapping("/users")
+    @GetMapping("api/users")
     public List<User> getAllUsers() {
         return userRepo.findAll();
     }
 
-    @GetMapping("/test")
+    @GetMapping("api/test")
     public String test() {
 //        return userRepo.currentUser();
         return "test";
     }
 
-    @GetMapping("/classes")
+    @GetMapping("api/classes")
     public List<ClassRoom> classes() {
         return classRepo.findAll();
     }
 
-    @PostMapping("/create-classes")
+    @PostMapping("api/create-classes")
     public void createClasses(@RequestBody Map<Integer, String> payload) {
         for (String obj : payload.values()) {
             System.out.println(obj);
@@ -67,5 +68,11 @@ public class DatabaseRestController {
             classRoom.name = obj;
             classRepo.save(classRoom);
         }
+    }
+
+    @GetMapping("api/account/{id}")
+    public String getUserById(@PathVariable() UUID id, Model model) {
+        model.addAttribute(Objects.requireNonNull(userRepo.findById(id).orElse(null)));
+        return "account";
     }
 }

@@ -30,10 +30,10 @@
     </nav>
     <main id="main">
         <h2>Aktivní Problémy</h2>
-        <a>
+        <a th:each="p : ${problems}">
             <div class="problemy">
                 <div class="problem-main-info">
-                    <h3>Problém s projektoreaam</h3>
+                    <h3 th:text="">Problém s projektoreaam</h3>
                     <p>Theta</p>
                 </div>
                 <div class="problem--info">

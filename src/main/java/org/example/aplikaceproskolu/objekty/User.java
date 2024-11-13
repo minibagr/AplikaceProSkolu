@@ -24,10 +24,10 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "discordId")
+    @Column(name = "discord_id")
     public String discordId;
 
-    @Column(name = "userToken")
+    @Column(name = "user_token")
     public UUID token;
 
     public User() {}
