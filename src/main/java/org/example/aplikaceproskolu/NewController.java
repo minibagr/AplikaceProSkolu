@@ -2,6 +2,7 @@ package org.example.aplikaceproskolu;
 
 import org.example.aplikaceproskolu.objekty.Problem;
 import org.example.aplikaceproskolu.repo.ClassRoomRepo;
+import org.example.aplikaceproskolu.repo.ProblemRepo;
 import org.example.aplikaceproskolu.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,19 +15,21 @@ import java.util.UUID;
 @Controller
 public class NewController {
     @Autowired
-    UserRepo userRepo;
-
+    private UserRepo userRepo;
     @Autowired
-    ClassRoomRepo classroomRepo;
+    private ClassRoomRepo classroomRepo;
+    @Autowired
+    private ProblemRepo problemRepo;
 
     @GetMapping("/")
-    public String index() {
+    public String index(Model model) {
+        model.addAttribute("problems", problemRepo.findAll());
         return "index";
     }
 
-    @GetMapping("/account/{id}")
-    public String getUserById(@PathVariable() UUID id, Model model) {
-        model.addAttribute(Objects.requireNonNull(userRepo.findById(id).orElse(null)));
+    @GetMapping("/account/{token}")
+    public String getUserById(@PathVariable() UUID token, Model model) {
+        model.addAttribute(userRepo.findByToken(token));
         return "account";
     }
 
