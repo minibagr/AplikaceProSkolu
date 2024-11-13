@@ -38,6 +38,9 @@ public class Problem {
     @Column(name = "ended")
     public Date ended;
 
+    @Column(name = "pinned")
+    public boolean IsPinned;
+
     public Problem() {}
 
 }

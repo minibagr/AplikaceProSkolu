@@ -24,6 +24,12 @@ public class User {
     @Column(name = "email")
     public String email;
 
+    @Column(name = "discordId")
+    public String discordId;
+
+    @Column(name = "userToken")
+    public UUID token;
+
     public User() {}
 
 }
