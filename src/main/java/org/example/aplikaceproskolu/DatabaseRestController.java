@@ -1,6 +1,7 @@
 package org.example.aplikaceproskolu;
 
 import com.fasterxml.jackson.databind.util.JSONPObject;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.transaction.Transactional;
 import org.example.aplikaceproskolu.objekty.ClassRoom;
 import org.example.aplikaceproskolu.objekty.Problem;
@@ -11,8 +12,10 @@ import org.example.aplikaceproskolu.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
+
 
 @RestController
 public class DatabaseRestController {
@@ -30,19 +33,14 @@ public class DatabaseRestController {
     }
 
     @PostMapping("/problem-add")
-    public Problem addProblem(@ModelAttribute Problem problem) {
-//        Problem problem = new Problem();
-//        ClassRoom classRoom = classRepo.findByName(payload.get("classId").toString());
-//
-//        problem.name = (String) payload.get("name");
-//        problem.comment = (String) payload.get("comment");
-//        problem.classId = classRoom;
+    public void addProblem(@ModelAttribute Problem problem, HttpServletResponse httpResponse) throws IOException {
 
-        System.out.println(problem.classId);
-        System.out.println(problem.comment);
+        System.out.println(problem.getClassId());
+        System.out.println(problem.getComment());
 
-        problem.created = new Date();
-        return problemRepo.save(problem);
+        problem.setCreated(new Date());
+        problemRepo.save(problem);
+        httpResponse.sendRedirect("/");
     }
 
     @GetMapping("/users")

@@ -1,18 +1,14 @@
 package org.example.aplikaceproskolu;
 
 import org.example.aplikaceproskolu.objekty.Problem;
-import org.example.aplikaceproskolu.objekty.User;
 import org.example.aplikaceproskolu.repo.ClassRoomRepo;
 import org.example.aplikaceproskolu.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import java.util.Objects;
 import java.util.UUID;
 
 @Controller
@@ -30,7 +26,7 @@ public class NewController {
 
     @GetMapping("/account/{id}")
     public String getUserById(@PathVariable() UUID id, Model model) {
-        model.addAttribute(userRepo.findById(id).orElse(null));
+        model.addAttribute(Objects.requireNonNull(userRepo.findById(id).orElse(null)));
         return "account";
     }
 

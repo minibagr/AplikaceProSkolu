@@ -13,17 +13,48 @@ public class User {
     @Id
     @Column(name = "user_id",unique = true)
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public UUID id;
+    private UUID id;
 
     @OneToMany(mappedBy = "userId")
-    public Set<Problem> problems;
+    private Set<Problem> problems;
 
     @Column(name = "name")
-    public String name;
+    private String name;
 
     @Column(name = "email")
-    public String email;
+    private String email;
 
     public User() {}
 
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public Set<Problem> getProblems() {
+        return problems;
+    }
+
+    public void setProblems(Set<Problem> problems) {
+        this.problems = problems;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }
