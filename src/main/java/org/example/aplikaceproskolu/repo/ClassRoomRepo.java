@@ -8,6 +8,5 @@ import org.springframework.data.repository.query.Param;
 import java.util.UUID;
 
 public interface ClassRoomRepo extends JpaRepository <ClassRoom, UUID> {
-    @Query("SELECT c FROM ClassRoom c WHERE c.name = :#{#class}")
-    public ClassRoom findByName(@Param("class") String name);
+    ClassRoom findByName(String name);
 }

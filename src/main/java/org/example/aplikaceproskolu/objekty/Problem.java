@@ -2,7 +2,6 @@ package org.example.aplikaceproskolu.objekty;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.example.aplikaceproskolu.repo.ClassRoomRepo;
 
 import java.util.Date;
 import java.util.UUID;
@@ -22,7 +21,7 @@ public class Problem {
 
     @ManyToOne()
     @JoinColumn(name = "user_id", nullable = true)
-    private User userId;
+    private Users userId;
 
     @ManyToOne()
     @JoinColumn(name = "class_id", nullable = true)
@@ -38,8 +37,8 @@ public class Problem {
     @Column(name = "ended")
     private Date ended;
 
-    @Column(name = "pinned")
-    public boolean IsPinned;
+    @Column(name = "pinned", nullable = true)
+    public boolean isPinned;
 
     public Problem() {}
 
@@ -87,7 +86,7 @@ public class Problem {
         return name;
     }
 
-    public User getUserId() {
+    public Users getUserId() {
         return userId;
     }
 
@@ -95,7 +94,7 @@ public class Problem {
         return comment;
     }
 
-    public void setUserId(User user) {
+    public void setUserId(Users user) {
         this.userId = user;
     }
 

@@ -26,7 +26,7 @@
             </a>
         </div>
         <div class="button selected-tab">
-            <a th:href="@{../account/${user.id}}">
+            <a th:href="@{../account}">
                 <img loading="lazy" decoding="async" src="/profile-icon.svg">
             </a>
         </div>
@@ -37,26 +37,26 @@
         <img id="profile-pic" src="https://placehold.co/200x200" alt="profilovka">
         <div id="udaje">
             <div id="name">
-                <h2>Jménocc</h2>
-                <p>Tomas Maly</p>
+                <h2>Jméno</h2>
+                <p th:text="${userDetails.name}"></p>
             </div>
             <div id="email">
                 <h2>Email</h2>
-                <p>bozo@ass.com</p>
+                <p th:text="${userDetails.email}">bozo@ass.com</p>
             </div>
         </div>
     </div>
     <h2 id="stats-text">Statistiky</h2>
     <div id="stats">
-        <div id="stat">
+        <div class="stat">
             <h3>Zadaných problemů:</h3>
-            <p>0</p>
+            <p th:text="${problemsCount}"></p>
         </div>
-        <div id="stat">
+        <div class="stat">
             <h3>Úspěšnost vyřešení:</h3>
             <p>0%</p>
         </div>
-        <div id="stat">
+        <div class="stat">
             <h3>Čas strávený na tvých problémech:</h3>
             <p>0 min</p>
         </div>

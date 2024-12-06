@@ -1,4 +1,5 @@
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +8,8 @@
 </head>
 <body>
     <nav>
-        <div class="button">
-            <a>
+        <div sec:authorize="hasRole('ADMIN')" class="button">
+            <a th:href = "@{/problemy}">
                 <img loading="lazy" decoding="async" src="/profile-icon.svg">
             </a>
         </div>
@@ -23,18 +24,19 @@
             </a>
         </div>
         <div class="button">
-            <a th:href="@{../account/${user.id}}">
+            <a th:href="@{../account}">
                 <img loading="lazy" decoding="async" src="/profile-icon.svg">
             </a>
         </div>
     </nav>
     <main>
-        <form th:action="@{/problem-add}" th:object="${problem}" method="post">
+        <form th:action="@{/api/problem-add}" th:object="${problem}" method="post" enctype="multipart/form-data">
             <input type="text" name="name" placeholder="Problem Title..." maxlength="60" required th:field="*{name}"/>
             <select th:field="*{classId}">
                 <option th:each="class : ${classes}" th:text="${class.name}" th:value="${class.id}"></option>
             </select>
             <textarea name="comment" placeholder="Description" maxlength="256" required th:field="*{comment}"></textarea>
+            <input type="hidden" th:name="|userId|" th:value="${userAdd.id}"/>
             <button type="submit">Send</button>
         </form>
     </main>
