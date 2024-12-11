@@ -11,4 +11,7 @@ import java.util.UUID;
 public interface ProblemRepo extends JpaRepository<Problem, UUID> {
     @Query("SELECT COUNT(p) FROM Problem p WHERE p.userId = :user")
     int countProblemByUser(@Param("user") Users user);
+
+    @Query("SELECT COUNT(p) FROM Problem p WHERE p.userId = :user AND p.ended IS NOT NULL")
+    int countProblemNotSolvedByUser(@Param("user") Users user);
 }

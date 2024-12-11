@@ -35,6 +35,7 @@ public class NewController {
      * @param model the model object used to pass attributes to the view
      * @return the name of the view to be rendered, in this case, "index"
      */
+    @PreAuthorize("permitAll()")
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("problems", problemRepo.findAll());
@@ -58,11 +59,14 @@ public class NewController {
      * @param model the model object used to pass attributes to the view
      * @return the name of the view to be rendered, in this case "account"
      */
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    @PreAuthorize("permitAll()")
     @GetMapping("/account")
     public String getUserById(Model model) {
         UserPrincipal currentUser = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
+        float percantage = problemRepo.countProblemNotSolvedByUser(currentUser.getUser()) / (float)problemRepo.countProblemByUser(currentUser.getUser()) * 100;
+
+        model.addAttribute("percantage", (int) percantage);
         model.addAttribute("problemsCount", problemRepo.countProblemByUser(currentUser.getUser()));
         model.addAttribute("userDetails", currentUser.getUser());
         return "account";
