@@ -33,8 +33,9 @@
         <a th:each="p : ${problems}">
             <div class="problemy">
                 <div class="problem-main-info">
-                    <h3 th:text="${p.getName()}">Problém s projektoream</h3>
-                    <p th:text="${p.getClassId().getName()}">Theta</p>
+                    <h3 th:text="${p.getName()}"></h3>
+                    <p th:text="${p.getClassId().getName()}"></p>
+                    <p th:text="${#dates.format(p.getCreated(), '(dd-MM-yyyy)')}"></p>
                 </div>
                 <div class="problem--info">
                     <p th:text="${p.getComment()}"></p>

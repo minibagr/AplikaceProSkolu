@@ -2,10 +2,12 @@ package org.example.aplikaceproskolu;
 
 import org.example.aplikaceproskolu.objekty.Problem;
 import org.example.aplikaceproskolu.objekty.UserPrincipal;
+import org.example.aplikaceproskolu.objekty.Users;
 import org.example.aplikaceproskolu.repo.ClassRoomRepo;
 import org.example.aplikaceproskolu.repo.ProblemRepo;
 import org.example.aplikaceproskolu.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -38,7 +40,7 @@ public class NewController {
     @PreAuthorize("permitAll()")
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("problems", problemRepo.findAll());
+        model.addAttribute("problems", problemRepo.findAll(Sort.by(Sort.Direction.ASC, "created")));
         return "index";
     }
 
@@ -69,6 +71,7 @@ public class NewController {
         model.addAttribute("percantage", (int) percantage);
         model.addAttribute("problemsCount", problemRepo.countProblemByUser(currentUser.getUser()));
         model.addAttribute("userDetails", currentUser.getUser());
+        model.addAttribute("addUser", new Users());
         return "account";
     }
 

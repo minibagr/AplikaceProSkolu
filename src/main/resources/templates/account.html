@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -61,6 +61,20 @@
             <p>0 min</p>
         </div>
     </div>
+
+    <div sec:authorize="hasRole('ADMIN')">
+        <form th:action="@{/api/add-user}" th:object="${addUser}" method="post">
+            <input type="text" name="name" th:field="*{name}" placeholder="Jmeno">
+            <input type="text" name="password" th:field="*{password}" placeholder="Heslo">
+            <input type="text" name="email" th:field="*{email}" placeholder="Email">
+            <select name="role" id="role" th:field="*{role}">
+                <option th:value="admin">Admin</option>
+                <option th:value="user">User</option>
+            </select>
+            <input type="submit">
+        </form>
+    </div>
+
     <footer>
     </footer>
 </body>

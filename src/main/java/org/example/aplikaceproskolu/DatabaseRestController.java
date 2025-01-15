@@ -9,7 +9,9 @@ import org.example.aplikaceproskolu.repo.ClassRoomRepo;
 import org.example.aplikaceproskolu.repo.ProblemRepo;
 import org.example.aplikaceproskolu.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,6 +34,8 @@ public class DatabaseRestController {
     @Autowired
     ClassRoomRepo classRepo;
 
+    private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
+
     /**
      * Handles the creation of a new problem entry by accepting a Problem object,
      * setting the creation date, saving it to the database, and redirecting to the root page.
@@ -40,6 +44,7 @@ public class DatabaseRestController {
      * @param httpResponse the HttpServletResponse used to send a redirect response.
      * @throws IOException if an input or output exception occurred during the redirection.
      */
+    @PreAuthorize("permitAll()")
     @PostMapping("/api/problem-add")
     public void addProblem(@ModelAttribute("problem") Problem problem, HttpServletResponse httpResponse) throws IOException {
         System.out.println("Post: " + problem.getUserId());
@@ -53,6 +58,7 @@ public class DatabaseRestController {
      *
      * @return a list of all users available in the repository
      */
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/api/users")
     public List<Users> getAllUsers() {
         return userRepo.findAll();
@@ -74,6 +80,7 @@ public class DatabaseRestController {
      *
      * @return a list of all ClassRoom entities stored in the database.
      */
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/api/classes")
     public List<ClassRoom> classes() {
         return classRepo.findAll();
@@ -86,6 +93,7 @@ public class DatabaseRestController {
      *
      * @param payload a map containing the classroom identifiers as keys and their names as values.
      */
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/api/create-classes")
     public void createClasses(@RequestBody Map<Integer, String> payload) {
         for (String obj : payload.values()) {
@@ -103,9 +111,25 @@ public class DatabaseRestController {
      * @param model the model to which the user details are added
      * @return the name of the view to be rendered, in this case "account"
      */
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/api/account/{id}")
     public String getUserById(@PathVariable() UUID id, Model model) {
         model.addAttribute(Objects.requireNonNull(userRepo.findById(id).orElse(null)));
         return "account";
+    }
+
+    /**
+     * Returns a users which is saved to database
+     * @param user the user you want to save
+     * @return the user that was saved
+     */
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/api/add-user")
+    public void newUser(@ModelAttribute("addUser") Users user, HttpServletResponse httpResponse) throws IOException {
+        if (userRepo.findByEmail(user.getEmail()) == null) {
+            user.setPassword(encoder.encode(user.getPassword()));
+            userRepo.save(user);
+            httpResponse.sendRedirect("/");
+        }
     }
 }
