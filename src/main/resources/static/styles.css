@@ -203,12 +203,24 @@ form option {
 ::-webkit-scrollbar {
     width: 1;
   }
-  ::-webkit-scrollbar-track {
-    background-color: black;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: var(--secondary-color);
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: var(--secondary-color);
-  }
+::-webkit-scrollbar-track {
+background-color: black;
+}
+::-webkit-scrollbar-thumb {
+background: var(--secondary-color);
+}
+::-webkit-scrollbar-thumb:hover {
+background: var(--secondary-color);
+}
+
+.nemec {
+    background: rgba(255, 0, 0, 0.5);
+}
+
+.pesak {
+    background: rgba(0, 255, 0, 0.5);
+}
+
+.oba {
+    background: rgba(0, 0, 255, 0.5);
+}

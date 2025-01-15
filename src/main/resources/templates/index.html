@@ -32,7 +32,7 @@
         <h2>Aktivní Problémy</h2>
         <a th:each="p : ${problems}">
             <div class="problemy">
-                <div class="problem-main-info">
+                <div class="problem-main-info" th:class="${p.fixUserId == null ? 'oba' : (p.fixUserId.lastName == 'Danihel' ? 'pesak' : 'nemec')}">
                     <h3 th:text="${p.getName()}"></h3>
                     <p th:text="${p.getClassId().getName()}"></p>
                     <p th:text="${#dates.format(p.getCreated(), '(dd-MM-yyyy)')}"></p>

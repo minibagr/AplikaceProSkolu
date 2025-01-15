@@ -27,6 +27,10 @@ public class Problem {
     @JoinColumn(name = "class_id", nullable = true)
     private ClassRoom classId;
 
+    @ManyToOne()
+    @JoinColumn(name = "user_fix_id")
+    private Users fixUserId;
+
     @Column(name = "comment")
     private String comment;
 
@@ -106,4 +110,19 @@ public class Problem {
         this.comment = comment;
     }
 
+    public Users getFixUserId() {
+        return fixUserId;
+    }
+
+    public void setFixUserId(Users fixUserId) {
+        this.fixUserId = fixUserId;
+    }
+
+    public boolean isPinned() {
+        return isPinned;
+    }
+
+    public void setPinned(boolean pinned) {
+        isPinned = pinned;
+    }
 }

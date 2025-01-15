@@ -21,6 +21,9 @@ public class Users {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "last_name")
+    private String lastName;
+
     @Column(name = "email")
     private String email;
 
@@ -84,5 +87,13 @@ public class Users {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 }

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -100,10 +101,15 @@ public class NewController {
     @GetMapping("/problem-add")
     public String problemAdd(Model model) {
         UserPrincipal currentUser = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        ArrayList<Users> fixUsers = new ArrayList<>();
+
+        fixUsers.add(userRepo.findByName("Sam"));
+        fixUsers.add(userRepo.findByName("Tomas"));
 
         model.addAttribute("userAdd", currentUser.getUser());
         model.addAttribute("classes", classroomRepo.findAll());
         model.addAttribute("problem", new Problem());
+        model.addAttribute("fixUsers", fixUsers);
         return "problem-add";
     }
 
