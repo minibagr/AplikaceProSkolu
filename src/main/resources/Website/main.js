@@ -19,7 +19,7 @@
         const dateConst = document.createElement('h4');
         dateConst.innerHTML = date;
 
-        const problemMainElement = document.createElement('h3');
+        const problemMainElement = document.createElement('div');
         problemMainElement.classList.add("problem-main-info");
 
         const problemDescription = document.createElement('div');
