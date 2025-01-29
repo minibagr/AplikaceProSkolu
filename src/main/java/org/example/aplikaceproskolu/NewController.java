@@ -41,6 +41,8 @@ public class NewController {
     @PreAuthorize("permitAll()")
     @GetMapping("/")
     public String index(Model model) {
+        UserPrincipal currentUser = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("current-user", currentUser.getUser());
         model.addAttribute("problems", problemRepo.findAll(Sort.by(Sort.Direction.ASC, "created")));
         return "index";
     }

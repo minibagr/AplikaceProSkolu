@@ -31,15 +31,18 @@ public class Problem {
     @JoinColumn(name = "user_fix_id")
     private Users fixUserId;
 
+    @ManyToOne()
+    @JoinColumn(name = "user_who_fixed_id")
+    private Users userWhoFixedId;
+
     @Column(name = "comment")
     private String comment;
 
     @Column(name = "created")
     private Date created;
-    @Column(name = "started")
-    private Date started;
-    @Column(name = "ended")
-    private Date ended;
+
+    @Column(name = "time")
+    private Integer time;
 
     @Column(name = "pinned", nullable = true)
     public boolean isPinned;
@@ -68,22 +71,6 @@ public class Problem {
 
     public void setCreated(Date created) {
         this.created = created;
-    }
-
-    public Date getStarted() {
-        return started;
-    }
-
-    public void setStarted(Date started) {
-        this.started = started;
-    }
-
-    public Date getEnded() {
-        return ended;
-    }
-
-    public void setEnded(Date ended) {
-        this.ended = ended;
     }
 
     public String getName() {
@@ -124,5 +111,21 @@ public class Problem {
 
     public void setPinned(boolean pinned) {
         isPinned = pinned;
+    }
+
+    public Users getUserWhoFixedId() {
+        return userWhoFixedId;
+    }
+
+    public void setUserWhoFixedId(Users userWhoFixedId) {
+        this.userWhoFixedId = userWhoFixedId;
+    }
+
+    public Integer getTime() {
+        return time;
+    }
+
+    public void setTime(Integer time) {
+        this.time = time;
     }
 }

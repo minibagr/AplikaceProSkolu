@@ -132,4 +132,12 @@ public class DatabaseRestController {
             httpResponse.sendRedirect("/");
         }
     }
+
+    @PutMapping("/api/complete-problem/{id}")
+    public void completeProblem(@PathVariable() UUID id, @RequestBody Map<Integer, Integer> payload, @ModelAttribute("current-user") Users user) {
+        Problem problem = problemRepo.findById(id).orElseThrow();
+        problem.setUserWhoFixedId(user);
+        problem.setTime(payload.get(0));
+        problemRepo.save(problem);
+    }
 }
