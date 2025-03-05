@@ -58,15 +58,15 @@
         </div>
         <div class="stat">
             <h3>Čas strávený na tvých problémech:</h3>
-            <p>0 min</p>
+            <p th:text="${timeSpent}"></p>
         </div>
     </div>
 
     <div sec:authorize="hasRole('ADMIN')">
         <form th:action="@{/api/add-user}" th:object="${addUser}" method="post">
-            <input type="text" name="name" th:field="*{name}" placeholder="Jmeno">
-            <input type="text" name="password" th:field="*{password}" placeholder="Heslo">
-            <input type="text" name="email" th:field="*{email}" placeholder="Email">
+            <input type="text" name="name" th:field="*{name}" placeholder="Jmeno" required>
+            <input type="text" name="password" th:field="*{password}" placeholder="Heslo" required>
+            <input type="text" name="email" th:field="*{email}" placeholder="Email" required>
             <select name="role" id="role" th:field="*{role}">
                 <option th:value="admin">Admin</option>
                 <option th:value="user">User</option>

@@ -23,7 +23,6 @@ for (let i = 0; i < timeButtons.length; i++) {
             calculateTime(timeButton)
         } else if (timeButton.innerText === "Stop") {
             clearInterval(interval)
-            console.log(time)
             sendRequest(time, timeButton)
         }
     })
@@ -39,7 +38,7 @@ const calculateTime = function(timeButton) {
 
 const sendRequest = async function(time, timeButton) {
     console.log(timeButton)
-    let requestData = {0: time}
+    let requestData = {0: time / 60}
     const response = await fetch('/api/complete-problem/' + timeButton.id, {
         method: 'PUT',
         headers: {
@@ -47,14 +46,91 @@ const sendRequest = async function(time, timeButton) {
         },
         body: JSON.stringify(requestData)
     });
-
-    if (!response.ok) {
-        // Handle HTTP errors
-        const errorData = await response.json();
-        console.error('Error:', errorData);
-        alert(`Failed to complete problem: ${response.statusText}`);
-    } else {
-        // Successfully handled
-        alert('Problem completed successfully!');
+    if (response.ok) {
+        window.location.reload()
     }
 }
+
+const DeleteUser = async function(id) {
+    await fetch('/api/delete-user/' + id, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(response => {
+        if (response.ok) {
+            window.location.href = "/problemy"; // Redirect in frontend
+        }
+    });
+}
+
+function ShowProblem(id) {
+    let problemDiv = document.getElementById(id);
+
+    if(problemDiv.classList.contains("expand")) {
+        problemDiv.classList.remove("expand");
+    } else {
+        problemDiv.classList.add("expand");
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.getElementById("searchInput");
+    const problems = document.querySelectorAll(".problemy");
+
+    searchInput.addEventListener("input", function () {
+        const searchTerm = searchInput.value.toLowerCase();
+
+        problems.forEach(function (problem) {
+            const problemTitle = problem.querySelector("h3").textContent.toLowerCase();
+
+            if (problemTitle.includes(searchTerm)) {
+                problem.style.display = "block";
+            } else {
+                problem.style.display = "none";
+            }
+        });
+    });
+});
+
+let buttonCLick = 0;
+let originalOrder = [];
+
+document.addEventListener("DOMContentLoaded", function () {
+    const problemsContainer = document.getElementById("main");
+    const problems = Array.from(problemsContainer.querySelectorAll(".problemy"));
+
+    originalOrder = problems.map(problem => problem);
+});
+
+function filterProblemsByDate() {
+    const problemsContainer = document.getElementById("main");
+    const problems = Array.from(problemsContainer.querySelectorAll(".problemy"));
+
+    if (buttonCLick === 0) {
+        problems.sort((a, b) => {
+            const dateA = new Date(a.querySelector("h4").textContent.replace(/[()]/g, ""));
+            const dateB = new Date(b.querySelector("h4").textContent.replace(/[()]/g, ""));
+            return dateA - dateB;
+        });
+    } else if (buttonCLick === 1) {
+        problems.sort((a, b) => {
+            const dateA = new Date(a.querySelector("h4").textContent.replace(/[()]/g, ""));
+            const dateB = new Date(b.querySelector("h4").textContent.replace(/[()]/g, ""));
+            return dateB - dateA;
+        });
+    } else if (buttonCLick === 2) {
+        problemsContainer.innerHTML = "";
+        originalOrder.forEach(problem => problemsContainer.appendChild(problem));
+        buttonCLick = -1;
+    }
+
+    if (buttonCLick !== -1) {
+        problems.forEach(problem => problemsContainer.appendChild(problem));
+    }
+
+    buttonCLick++;
+}
+
+const sortButton = document.getElementById("sortButton");
+if (sortButton) sortButton.addEventListener("click", filterProblemsByDate);

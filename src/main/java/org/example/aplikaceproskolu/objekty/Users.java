@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.util.Set;
 import java.util.UUID;
 import lombok.Data;
+import org.antlr.v4.runtime.misc.NotNull;
 
 @Entity
 @Data
@@ -18,19 +19,19 @@ public class Users {
     @OneToMany(mappedBy = "userId")
     private Set<Problem> problems;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "last_name")
+    @Column(name = "last_name", nullable = true)
     private String lastName;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "role")
+    @Column(name = "role", nullable = false)
     private String role;
 
 //    @Column(name = "discord_id")

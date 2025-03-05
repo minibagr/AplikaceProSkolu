@@ -42,7 +42,7 @@ public class Problem {
     private Date created;
 
     @Column(name = "time")
-    private Integer time;
+    private Double time = null;
 
     @Column(name = "pinned", nullable = true)
     public boolean isPinned;
@@ -121,11 +121,11 @@ public class Problem {
         this.userWhoFixedId = userWhoFixedId;
     }
 
-    public Integer getTime() {
+    public Double getTime() {
         return time;
     }
 
-    public void setTime(Integer time) {
+    public void setTime(Double time) {
         this.time = time;
     }
 }

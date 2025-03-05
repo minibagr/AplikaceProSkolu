@@ -41,9 +41,8 @@ public class NewController {
     @PreAuthorize("permitAll()")
     @GetMapping("/")
     public String index(Model model) {
-        UserPrincipal currentUser = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        model.addAttribute("current-user", currentUser.getUser());
-        model.addAttribute("problems", problemRepo.findAll(Sort.by(Sort.Direction.ASC, "created")));
+        model.addAttribute("problems", problemRepo.getNotCompleted(Sort.by(Sort.Direction.ASC, "created")));
+        model.addAttribute("problemsCompleted", problemRepo.getCompleted(Sort.by(Sort.Direction.ASC, "created")));
         return "index";
     }
 
@@ -73,6 +72,7 @@ public class NewController {
 
         model.addAttribute("percantage", (int) percantage);
         model.addAttribute("problemsCount", problemRepo.countProblemByUser(currentUser.getUser()));
+        model.addAttribute("timeSpent", TimeFormat.formatTime(problemRepo.sumTimeSpendOnProblemFromUser(currentUser.getUser())));
         model.addAttribute("userDetails", currentUser.getUser());
         model.addAttribute("addUser", new Users());
         return "account";
@@ -85,7 +85,8 @@ public class NewController {
      */
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/problemy")
-    public String problemy() {
+    public String problemy(Model model) {
+        model.addAttribute("users", userRepo.findAll(Sort.by(Sort.Direction.ASC, "name")));
         return "ahoj";
     }
 
@@ -113,18 +114,5 @@ public class NewController {
         model.addAttribute("problem", new Problem());
         model.addAttribute("fixUsers", fixUsers);
         return "problem-add";
-    }
-
-    /**
-     * Handles requests to the "/problem/{id}" endpoint by mapping a UUID path variable
-     * to the specified problem.
-     *
-     * @param problemUUID the UUID of the problem to be retrieved
-     * @param model the model object used to pass attributes to the view
-     * @return the name of the view to be rendered, in this case "problem"
-     */
-    @GetMapping("/problem/{id}")
-    public String problem(@PathVariable UUID problemUUID, Model model) {
-        return "problem";
     }
 }

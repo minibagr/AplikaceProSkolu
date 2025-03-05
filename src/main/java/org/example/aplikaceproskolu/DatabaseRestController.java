@@ -9,7 +9,9 @@ import org.example.aplikaceproskolu.repo.ClassRoomRepo;
 import org.example.aplikaceproskolu.repo.ProblemRepo;
 import org.example.aplikaceproskolu.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
@@ -113,9 +115,8 @@ public class DatabaseRestController {
      */
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/api/account/{id}")
-    public String getUserById(@PathVariable() UUID id, Model model) {
-        model.addAttribute(Objects.requireNonNull(userRepo.findById(id).orElse(null)));
-        return "account";
+    public Users getUserById(@PathVariable() UUID id) {
+        return userRepo.findById(id).orElse(null);
     }
 
     /**
@@ -133,10 +134,53 @@ public class DatabaseRestController {
         }
     }
 
+    /**
+     * Handles requests to the "api/problem/{id}" endpoint by mapping a UUID path variable
+     * to the specified problem.
+     *
+     * @param problemUUID the UUID of the problem to be retrieved
+     * @param model the model object used to pass attributes to the view
+     * @return the name of the view to be rendered, in this case "problem"
+     */
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("api/problem/{id}")
+    public Problem problem(@PathVariable() UUID id) {
+        return problemRepo.findById(id).orElse(null);
+    }
+
+    /**
+     * Handles requests to the "api/all-problems" endpoint by mapping a UUID path variable
+     * to the specified problem.
+     *
+     * @return all problems from database
+     */
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/api/all-problems")
+    public List<Problem> getAllProblems() {
+        return problemRepo.findAll();
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/api/delete-user/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable UUID id) {
+        Users user = userRepo.findById(id).orElse(null);
+
+        if (user != null) {
+            List<Problem> problemsByUser = problemRepo.getAllByUserId(Objects.requireNonNull(userRepo.findById(id).orElse(null)));
+            problemRepo.deleteAll(problemsByUser);
+            userRepo.delete(Objects.requireNonNull(userRepo.findById(id).orElse(null)));
+            return ResponseEntity.noContent().build(); // 204 No Content (SPRÁVNĚ)
+        }
+
+        return ResponseEntity.notFound().build(); // 404 pokud uživatel neexistuje
+    }
+
+
     @PutMapping("/api/complete-problem/{id}")
-    public void completeProblem(@PathVariable() UUID id, @RequestBody Map<Integer, Integer> payload, @ModelAttribute("current-user") Users user) {
+    public void completeProblem(@PathVariable() UUID id, @RequestBody Map<Integer, Double> payload, @AuthenticationPrincipal UserPrincipal user) {
         Problem problem = problemRepo.findById(id).orElseThrow();
-        problem.setUserWhoFixedId(user);
+//        UserPrincipal currentUser = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        problem.setUserWhoFixedId(user.getUser());
         problem.setTime(payload.get(0));
         problemRepo.save(problem);
     }

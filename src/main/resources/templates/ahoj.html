@@ -8,5 +8,14 @@
 </head>
 <body>
     <h1>Admin page</h1>
+    <div id="all-users">
+        <div th:each="u : ${users}">
+            <p th:text="${u.getName()}"></p>
+            <p th:text="${u.getId()}"></p>
+            <button th:id="${u.getId()}" th:onclick="DeleteUser(this.getAttribute('id'))">Delete</button>
+        </div>
+    </div>
+
+    <script src="../main.js"></script>
 </body>
 </html>

@@ -28,19 +28,21 @@
             </a>
         </div>
     </nav>
-    <main id="main">
+    <div class="top-holder">
+        <input type="text" placeholder="Hledat podle nazvu...." id="searchInput">
+        <button id="sortButton">SORT</button>
         <h2>Aktivní Problémy</h2>
+    </div>
+    <main id="main">
         <a th:each="p : ${problems}">
-            <div class="problemy">
-                <div class="problem-main-info" th:class="${p.fixUserId == null ? 'oba' : (p.fixUserId.lastName == 'Danihel' ? 'pesak' : 'nemec')}">
+            <div class="problemy" th:id="${p.getID()}" th:onclick="ShowProblem(this.getAttribute('id'))">
+                <div th:class="'problem-main-info ' + ${p.fixUserId == null ? 'oba' : (p.fixUserId.lastName == 'Danihel' ? 'pesak' : 'nemec')}">
                     <h3 th:text="${p.getName()}"></h3>
                     <p th:text="${p.getClassId().getName()}"></p>
-                    <p th:text="${#dates.format(p.getCreated(), '(dd-MM-yyyy)')}"></p>
+                    <h4 th:text="${#dates.format(p.getCreated(), 'MM')}"></h4>
                     <button th:id="${p.getID()}" sec:authorize="hasRole('ADMIN')" class="time-button">Start</button>
                 </div>
-                <div class="problem--info">
-                    <p th:text="${p.getComment()}"></p>
-                </div>
+                <div class="problem-info" th:text="${p.getComment()}"></div>
             </div>
         </a>
 <!--        <a>-->
@@ -81,6 +83,16 @@
 <!--            </div>-->
 <!--        </a>-->
         <h2>Vyřešené Problémy</h2>
+        <a th:each="p : ${problemsCompleted}">
+            <div class="problemy" th:id="${p.getID()}" th:onclick="ShowProblem(this.getAttribute('id'))">
+                <div th:class="'problem-main-info ' + ${p.fixUserId == null ? 'oba' : (p.fixUserId.lastName == 'Danihel' ? 'pesak' : 'nemec')}">
+                    <h3 th:text="${p.getName()}"></h3>
+                    <p th:text="${p.getClassId().getName()}"></p>
+                    <h4 th:text="${#dates.format(p.getCreated(), 'MM')}"></h4>
+                </div>
+                <div class="problem-info" th:text="${p.getComment()}"></div>
+            </div>
+        </a>
     </main>
     <script src="../main.js"></script>
 </body>
