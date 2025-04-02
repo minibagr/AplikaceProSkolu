@@ -4,14 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Account</title>
-    <link href='../static/styles-profile.css' rel='stylesheet'>
-    <link href='../static/styles.css' rel='stylesheet'>
+    <link href='styles-account.css' rel='stylesheet'>
+    <link href='styles.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 </head>
 <body>
     <nav>
         <div class="button">
-            <a>
+            <a href="main.html">
                 <img loading="lazy" decoding="async" src="profile-icon.svg">
             </a>
         </div>
@@ -26,43 +26,51 @@
             </a>
         </div>
         <div class="button selected-tab">
-            <a href="account.html">
+            <a>
                 <img loading="lazy" decoding="async" src="profile-icon.svg">
             </a>
         </div>
     </nav>
-    <h1>Profil</h1>
     <div id="start">
-        <img id="profile-pic" src="https://placehold.co/200x200" alt="profilovka">
+        <div class="profile-banner">
+            <img id="profile-pic" src="./unicorn.jpg" alt="profilovka">
+            <div id="name">
+                <h2>Adam Němec</h2>
+                <p>učitel</p>
+            </div>
+        </div>
+        <div id="important-stats">
+            <div>
+                <h2>158</h2>
+                <p>Vyreseno problemů</p>
+            </div>
+            <div>
+                <h2>38,4</h2>
+                <p>Ztravený čas</p>
+            </div>
+            <div>
+                <h2>262</h2>
+                <p>Dostáno problémů</p>
+            </div>
+        </div>
+        <h1>Informace</h1>
         <div id="udaje">
             <div id="name">
-                <h2>Jménocc</h2>
-                <p>Tomas Maly</p>
-            </div>
-            <div id="email">
                 <h2>Email</h2>
-                <p>bozo@ass.com</p>
+                <p>adamnemec@creativehill.cz</p>
             </div>
             <div id="name">
-                <h2>Token</h2>
-                <p>awdawdiawiaws</p>
-                <button>RESTART TOKEN</button>
+                <h2>Tento měsíc</h2>
+                <p>35h</p>
             </div>
-        </div>
-    </div>
-    <h2 id="stats-text">Statistiky</h2>
-    <div id="stats">
-        <div id="stat">
-            <h3>Zadaných problemů:</h3>
-            <p>0</p>
-        </div>
-        <div id="stat">
-            <h3>Úspěšnost vyřešení:</h3>
-            <p>0%</p>
-        </div>
-        <div id="stat">
-            <h3>Čas strávený na tvých problémech:</h3>
-            <p>0 min</p>
+            <div id="name">
+                <h2>Heslo</h2>
+                <p>**********</p>
+            </div>
+            <div id="name">
+                <h2>Pracuje od</h2>
+                <p>8.9.2024</p>
+            </div>
         </div>
     </div>
     <footer>
