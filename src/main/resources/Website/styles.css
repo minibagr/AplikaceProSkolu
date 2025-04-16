@@ -3,7 +3,7 @@
 
 :root {
     --main-color: #252525;
-    --secondary-color: #fed500;
+    --secondary-color: #ddc136;
     --main-font: "Rubik", sans-serif;
 }
 
@@ -71,6 +71,7 @@ h2 {
     user-select: none;
     color: var(--secondary-color);
     font-family: var(--main-font);
+    font-size: 1.2rem;
 }
 
 main a {
