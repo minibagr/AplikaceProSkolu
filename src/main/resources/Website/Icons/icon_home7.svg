@@ -1,0 +1,12 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+	<title>New Project</title>
+	<defs>
+		<image  width="42" height="25" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAZCAMAAABw80xqAAAAAXNSR0IB2cksfwAAAMlQTFRF////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////AAAA////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////mgb8nwAAAEN0Uk5T9P38+/r5+Pf29fPy8fDv7unX1Qj/6OYJB8ijosNsBQZbaQMAV+cCaARnWAFm/gBZbW5vcEowL0dzdHV2a0BBP0JDPbn/x9IAAADfSURBVHictdJLDoIwEADQmVZ+AsonJG49gMYLeP8j6EpjjGHjQhf+goBAqVAMWkichjCdvpICg4DFaNxuMOQzVsrDMEEiTm5GdUuSxl2oZktS0oWqo3pJweyV0zwjB/87Na5m/n3gAfreFanRoHb+1CJwK9Dp2UBlLFAllqV+2kp1HDgtdOP1ph5StycNYk619S9K7pyufJFaSLx/UKxXYJK2Uqed0rBJZ6EkDZqUXMrMSj7oAoquKy+sOgvrCwndubgspyyyriYsSyjbUdYJHHEO/P9AxJPne6tanSF6AeTQXkp4GsqbAAAAAElFTkSuQmCC"/>
+	</defs>
+	<style>
+		.s0 { fill: #ffffff } 
+	</style>
+	<path id="Background" fill-rule="evenodd" class="s0" d="m9 32.1l22.9-24.1 23.1 24z"/>
+	<use id="Shape 1" href="#img1" x="12" y="31"/>
+	<path id="Shape 2" fill-rule="evenodd" class="s0" d="m27 36v17h-9v-17z"/>
+</svg>

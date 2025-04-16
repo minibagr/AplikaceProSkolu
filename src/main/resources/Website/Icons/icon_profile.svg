@@ -1,0 +1,11 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+	<title>New Project</title>
+	<defs>
+		<image  width="36" height="17" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAARCAMAAACCaf60AAAAAXNSR0IB2cksfwAAAPZQTFRFAAAA////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////sbfFfAAAAFJ0Uk5TAAAUbbzU5ffTbBEGVbP7//msTUzJwEKkoRPFt3pjSHy4wyjf3VoJCl7gKgK2crSI6TU45Bsd5zrH9i4w+Fhzd1AF4Rj+Q04ZaN6jm59rb09T2EVTJTsAAAEaSURBVHicdZHLS4JREMXPKRQyV5LQJkoIyqDCRUUqPSEiQvxXQ6RFi7Co6EWhkBREZaCLBBeWPVQ+5z6kzO87i+Ey93dnzswlRIQRteAMtHz8tDnH3FskoAH88t+NLsYuE2ITvfLzzVL2cSD4hX4N1Rt/oFF+mHTQeGLNln9xTG8JEVbVOUw+2BpTZFmn/EULzfBVJd7bPb1mSyqOt+8MNPesq938cxRzniRO5DUUe5TzJK/6fC/wXuL0hYKWiqrjqct0CRaA4YpASamH+SMXBli9VW1z5MiPDDF26Aqt81qWWuUmL4HFA1cG2DoXa4PcPgPi+x6MPBfvy9w5AZJZT2j3WPkPi6WVjCeUyqmfjsr61/Y8obRMtNEByiVCWaZy8qgAAAAASUVORK5CYII="/>
+	</defs>
+	<style>
+		.s0 { fill: none;stroke: #ffffff;stroke-linejoin: round;stroke-width: 4.2 } 
+	</style>
+	<use id="Background" href="#img1" x="14" y="36"/>
+	<path id="Shape 1" fill-rule="evenodd" class="s0" d="m32 33c-6.6 0-12-4.9-12-11 0-6.1 5.4-11 12-11 6.6 0 12 4.9 12 11 0 6.1-5.4 11-12 11z"/>
+</svg>

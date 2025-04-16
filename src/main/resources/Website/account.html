@@ -4,36 +4,36 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Account</title>
-    <link href='../static/styles-account.css' rel='stylesheet'>
-    <link href='../static/styles.css' rel='stylesheet'>
+    <link href='styles-account.css' rel='stylesheet'>
+    <link href='styles.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 </head>
 <body>
     <nav>
         <div class="button">
             <a href="main.html">
-                <img loading="lazy" decoding="async" src="profile-icon.svg">
+                <img loading="lazy" decoding="async" src="Icons/icon_home7.svg">
             </a>
         </div>
         <div class="button">
             <a href="problem-add.html">
-                <img loading="lazy" decoding="async" src="add-icon.svg">
+                <img loading="lazy" decoding="async" src="Icons/icon_add.svg">
             </a>    
         </div>
         <div class="button">
             <a href="index.html">
-                <img loading="lazy" decoding="async" src="problem-icon-svg.svg">
+                <img loading="lazy" decoding="async" src="Icons/icon_problem.svg">
             </a>
         </div>
         <div class="button selected-tab">
             <a>
-                <img loading="lazy" decoding="async" src="profile-icon.svg">
+                <img loading="lazy" decoding="async" src="./Icons/icon_profile.svg">
             </a>
         </div>
     </nav>
     <div id="start">
         <div class="profile-banner">
-            <img id="profile-pic" src="./unicorn.jpg" alt="profilovka">
+            <img class="img-profile" id="profile-pic" src="./unicorn.jpg" alt="profilovka">
             <div id="name">
                 <h2>Adam Němec</h2>
                 <p>učitel</p>
@@ -51,6 +51,11 @@
             <div>
                 <h2>262</h2>
                 <p>Dostáno problémů</p>
+            </div>
+            <div>
+                <button class="print-button">
+                    <img class="img-printer" src="./img_printer.png">
+                </button>
             </div>
         </div>
         <h1>Informace</h1>
@@ -73,6 +78,16 @@
             </div>
         </div>
     </div>
+    <form>
+        <input placeholder="Enter username" minlength="4" type="text" required>
+        <input placeholder="Enter email of user" type="email" required>
+        <input placeholder="Enter password" type="password" minlength="5" required>
+        <select>
+            <option>Default</option>
+            <option>Admin</option>
+        </select>
+        <button type="submit">ADD ACCOUNT</button>
+    </form>
     <footer>
     </footer>
 </body>
