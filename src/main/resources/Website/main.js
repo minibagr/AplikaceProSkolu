@@ -19,6 +19,9 @@
         const dateConst = document.createElement('h4');
         dateConst.innerHTML = date;
 
+        const trackProblem = document.createElement('button');
+        trackProblem.innerHTML = "TRACK";
+
         const problemMainElement = document.createElement('div');
         problemMainElement.classList.add("problem-main-info");
 
@@ -38,6 +41,7 @@
         problemMainElement.appendChild(titleElement);
         problemMainElement.appendChild(classTitleElement);
         problemMainElement.appendChild(dateConst);
+        problemMainElement.appendChild(trackProblem);
         //  problemMainElement.appendChild(checkbox);
 
 
@@ -47,7 +51,7 @@
     }
 
 
-    AddProblem("Chybný projektor", "učebna B", "Projektor se nezapíná.", "12");
+AddProblem("Chybný projektor", "učebna B", "Projektor se nezapíná.", "12");
 AddProblem("Zamrzlý počítač", "učebna C", "Počítač se zamrzne při spuštění.", "29");
 AddProblem("Nefungující tiskárna", "učebna D", "Tiskárna nevydává žádné výtisky.", "5");
 AddProblem("Zapomenuté heslo", "učebna E", "Student si nemůže přihlásit do systému.", "7");
