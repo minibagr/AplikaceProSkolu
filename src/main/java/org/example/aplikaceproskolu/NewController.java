@@ -1,5 +1,6 @@
 package org.example.aplikaceproskolu;
 
+import org.example.aplikaceproskolu.email.EmailService;
 import org.example.aplikaceproskolu.objekty.Problem;
 import org.example.aplikaceproskolu.objekty.UserPrincipal;
 import org.example.aplikaceproskolu.objekty.Users;
@@ -16,9 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Controller class for handling web requests related to user accounts, problems, and authentication.
@@ -41,7 +40,12 @@ public class NewController {
     @PreAuthorize("permitAll()")
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("problems", problemRepo.getNotCompleted(Sort.by(Sort.Direction.ASC, "created")));
+        Date date = new Date();
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(date);
+        System.out.println(calendar.get(Calendar.MONTH));
+        System.out.println(calendar.get(Calendar.YEAR));
+        model.addAttribute("problems", problemRepo.getNotCompleted(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), Sort.by(Sort.Direction.ASC, "created")));
         model.addAttribute("problemsCompleted", problemRepo.getCompleted(Sort.by(Sort.Direction.ASC, "created")));
         return "index";
     }
@@ -68,9 +72,9 @@ public class NewController {
     public String getUserById(Model model) {
         UserPrincipal currentUser = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        float percantage = problemRepo.countProblemNotSolvedByUser(currentUser.getUser()) / (float)problemRepo.countProblemByUser(currentUser.getUser()) * 100;
+        float percentage = problemRepo.countProblemSolvedByUser(currentUser.getUser()) / (float)problemRepo.countProblemByUser(currentUser.getUser()) * 100;
 
-        model.addAttribute("percantage", (int) percantage);
+        model.addAttribute("percentage", (int) percentage);
         model.addAttribute("problemsCount", problemRepo.countProblemByUser(currentUser.getUser()));
         model.addAttribute("timeSpent", TimeFormat.formatTime(problemRepo.sumTimeSpendOnProblemFromUser(currentUser.getUser())));
         model.addAttribute("userDetails", currentUser.getUser());

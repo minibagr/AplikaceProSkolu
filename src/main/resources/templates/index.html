@@ -7,23 +7,23 @@
 </head>
 <body>
     <nav>
-        <div class="button">
-            <a>
+        <div sec:authorize="hasRole('ADMIN')" class="button">
+            <a th:href = "@{/problemy}">
                 <img loading="lazy" decoding="async" src="/profile-icon.svg">
             </a>
         </div>
         <div class="button">
-            <a th:href="@{/problem-add}">
+            <a th:href="@{../problem-add}">
                 <img loading="lazy" decoding="async" src="/add-icon.svg">
-            </a>    
+            </a>
         </div>
         <div class="button selected-tab">
-            <a th:href="@{/static}">
+            <a th:href="@{../}">
                 <img loading="lazy" decoding="async" src="/problem-icon-svg.svg">
             </a>
         </div>
         <div class="button">
-            <a th:href="@{/account}">
+            <a th:href="@{../account}">
                 <img loading="lazy" decoding="async" src="/profile-icon.svg">
             </a>
         </div>
@@ -34,17 +34,19 @@
         <h2>Aktivní Problémy</h2>
     </div>
     <main id="main">
-        <a th:each="p : ${problems}">
-            <div class="problemy" th:id="${p.getID()}" th:onclick="ShowProblem(this.getAttribute('id'))">
-                <div th:class="'problem-main-info ' + ${p.fixUserId == null ? 'oba' : (p.fixUserId.lastName == 'Danihel' ? 'pesak' : 'nemec')}">
-                    <h3 th:text="${p.getName()}"></h3>
-                    <p th:text="${p.getClassId().getName()}"></p>
-                    <h4 th:text="${#dates.format(p.getCreated(), 'MM')}"></h4>
-                    <button th:id="${p.getID()}" sec:authorize="hasRole('ADMIN')" class="time-button">Start</button>
+        <div id="active-problems">
+            <a th:each="p : ${problems}">
+                <div class="problemy active" th:id="${p.getID()}">
+                    <div th:class="'problem-main-info ' + ${p.fixUserId == null ? 'oba' : (p.fixUserId.lastName == 'Danihel' ? 'pesak' : 'nemec')}">
+                        <h3 th:text="${p.getName()}"></h3>
+                        <p th:text="${p.getClassId().getName()}"></p>
+                        <h4 th:text="${#dates.format(p.getCreated(), 'MM')}"></h4>
+                        <button th:id="${p.getID()}" sec:authorize="hasRole('ADMIN')" class="time-button">Start</button>
+                    </div>
+                    <div class="problem-info" th:text="${p.getComment()}"></div>
                 </div>
-                <div class="problem-info" th:text="${p.getComment()}"></div>
-            </div>
-        </a>
+            </a>
+        </div>
 <!--        <a>-->
 <!--            <div class="problemy">-->
 <!--                <div class="problem-main-info">-->
@@ -82,17 +84,17 @@
 <!--                </div>-->
 <!--            </div>-->
 <!--        </a>-->
-        <h2>Vyřešené Problémy</h2>
-        <a th:each="p : ${problemsCompleted}">
-            <div class="problemy" th:id="${p.getID()}" th:onclick="ShowProblem(this.getAttribute('id'))">
-                <div th:class="'problem-main-info ' + ${p.fixUserId == null ? 'oba' : (p.fixUserId.lastName == 'Danihel' ? 'pesak' : 'nemec')}">
-                    <h3 th:text="${p.getName()}"></h3>
-                    <p th:text="${p.getClassId().getName()}"></p>
-                    <h4 th:text="${#dates.format(p.getCreated(), 'MM')}"></h4>
-                </div>
-                <div class="problem-info" th:text="${p.getComment()}"></div>
-            </div>
-        </a>
+<!--        <h2>Vyřešené Problémy</h2>-->
+<!--        <a th:each="p : ${problemsCompleted}">-->
+<!--            <div class="problemy" th:id="${p.getID()}" th:onclick="ShowProblem(this.getAttribute('id'))">-->
+<!--                <div th:class="'problem-main-info ' + ${p.fixUserId == null ? 'oba' : (p.fixUserId.lastName == 'Danihel' ? 'pesak' : 'nemec')}">-->
+<!--                    <h3 th:text="${p.getName()}"></h3>-->
+<!--                    <p th:text="${p.getClassId().getName()}"></p>-->
+<!--                    <h4 th:text="${#dates.format(p.getCreated(), 'MM')}"></h4>-->
+<!--                </div>-->
+<!--                <div class="problem-info" th:text="${p.getComment()}"></div>-->
+<!--            </div>-->
+<!--        </a>-->
     </main>
     <script src="../main.js"></script>
 </body>

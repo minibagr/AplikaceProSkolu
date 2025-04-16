@@ -1,17 +1,3 @@
-// const mainParent = document.getElementById("main");
-//
-// function LukasSmrdi(title, description) {
-//     const aElement = document.createElement('a');
-//     mainParent.appendChild(aElement);
-//     const problemyDiv = document.createElement('div');
-//     problemyDiv.classList.add('problemy');
-//
-//     aElement.appendChild(problemyDiv);
-// }
-//
-// LukasSmrdi("ahoj", "ahoj");
-// LukasSmrdi("ahoj", "ahoj");
-
 const timeButtons = document.getElementsByClassName("time-button")
 let interval
 let time
@@ -64,6 +50,14 @@ const DeleteUser = async function(id) {
     });
 }
 
+let activeProblems = document.getElementsByClassName("active")
+
+for (let activeProblem of activeProblems) {
+    activeProblem.addEventListener("click", (e) => {
+        ShowProblem(activeProblem.getAttribute("id"))
+    })
+}
+
 function ShowProblem(id) {
     let problemDiv = document.getElementById(id);
 
@@ -97,7 +91,7 @@ let buttonCLick = 0;
 let originalOrder = [];
 
 document.addEventListener("DOMContentLoaded", function () {
-    const problemsContainer = document.getElementById("main");
+    const problemsContainer = document.getElementById("active-problems");
     const problems = Array.from(problemsContainer.querySelectorAll(".problemy"));
 
     originalOrder = problems.map(problem => problem);

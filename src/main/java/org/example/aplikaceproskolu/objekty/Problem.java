@@ -14,7 +14,7 @@ public class Problem {
     @Id
     @Column(name = "problem_id",unique = true)
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID ID;
+    private UUID id;
 
     @Column(name = "problem_name")
     private String name;
@@ -42,19 +42,38 @@ public class Problem {
     private Date created;
 
     @Column(name = "time")
-    private Double time = null;
+    private Double time = 0.0;
 
-    @Column(name = "pinned", nullable = true)
-    public boolean isPinned;
+    @Column(name = "year")
+    private Integer year;
+
+    @Column(name="month")
+    private Integer month;
+
+    public Integer getYear() {
+        return year;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
+    }
+
+    public Integer getMonth() {
+        return month;
+    }
+
+    public void setMonth(Integer month) {
+        this.month = month;
+    }
 
     public Problem() {}
 
     public UUID getID() {
-        return ID;
+        return id;
     }
 
-    public void setID(UUID ID) {
-        this.ID = ID;
+    public void setID(UUID id) {
+        this.id = id;
     }
 
     public void setName(String name) {
@@ -103,14 +122,6 @@ public class Problem {
 
     public void setFixUserId(Users fixUserId) {
         this.fixUserId = fixUserId;
-    }
-
-    public boolean isPinned() {
-        return isPinned;
-    }
-
-    public void setPinned(boolean pinned) {
-        isPinned = pinned;
     }
 
     public Users getUserWhoFixedId() {

@@ -18,17 +18,20 @@ public interface ProblemRepo extends JpaRepository<Problem, UUID> {
     @Query("SELECT COUNT(p) FROM Problem p WHERE p.userId = :user")
     int countProblemByUser(@Param("user") Users user);
 
-    @Query("SELECT COUNT(p) FROM Problem p WHERE p.userId = :user AND p.time IS NOT NULL")
-    int countProblemNotSolvedByUser(@Param("user") Users user);
+    @Query("SELECT COUNT(p) FROM Problem p WHERE p.userId = :user AND p.time > 0")
+    int countProblemSolvedByUser(@Param("user") Users user);
 
     @Query("SELECT SUM(p.time) FROM Problem p WHERE p.userId = :user")
     double sumTimeSpendOnProblemFromUser(@Param("user") Users user);
 
     List<Problem> getAllByUserId(Users user);
 
-    @Query("SELECT p FROM Problem p WHERE p.time IS NULL")
-    List<Problem> getNotCompleted(Sort sort);
+    @Query("SELECT p FROM Problem p WHERE p.time = 0 AND p.year = :year AND p.month = :month")
+    List<Problem> getNotCompleted(@Param("year") int year, @Param("month") int month, Sort sort);
 
-    @Query("SELECT p FROM Problem p WHERE p.time IS NOT NULL")
+    @Query("SELECT p FROM Problem p WHERE p.time > 0")
     List<Problem> getCompleted(Sort sort);
+
+    @Query("SELECT p FROM Problem p WHERE p.month = :month AND p.year = :year")
+    List<Problem> getProblemByMonthAndYear(@Param("year") int year, @Param("month") int month, Sort sort);
 }

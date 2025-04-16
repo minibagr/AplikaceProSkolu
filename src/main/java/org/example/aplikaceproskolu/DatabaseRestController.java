@@ -1,6 +1,7 @@
 package org.example.aplikaceproskolu;
 
 import jakarta.servlet.http.HttpServletResponse;
+import org.example.aplikaceproskolu.email.EmailService;
 import org.example.aplikaceproskolu.objekty.ClassRoom;
 import org.example.aplikaceproskolu.objekty.Problem;
 import org.example.aplikaceproskolu.objekty.UserPrincipal;
@@ -35,6 +36,8 @@ public class DatabaseRestController {
     ProblemRepo problemRepo;
     @Autowired
     ClassRoomRepo classRepo;
+    @Autowired
+    EmailService emailService;
 
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
 
@@ -49,9 +52,19 @@ public class DatabaseRestController {
     @PreAuthorize("permitAll()")
     @PostMapping("/api/problem-add")
     public void addProblem(@ModelAttribute("problem") Problem problem, HttpServletResponse httpResponse) throws IOException {
-        System.out.println("Post: " + problem.getUserId());
-        problem.setCreated(new Date());
+        Date date = new Date();
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(date);
+        problem.setCreated(date);
+        problem.setMonth(calendar.get(Calendar.MONTH));
+        problem.setYear(calendar.get(Calendar.YEAR));
+        System.out.println(calendar.get(Calendar.YEAR));
         problemRepo.save(problem);
+        try {
+            emailService.sendSimpleMessage("hufsam4@gmail.com", "Problemova aplikace", "<h2>Byl přidán nový problém</h2><h3 style='display: inline-block'>Problém:</h3> <h4 style='display: inline-block'>" + problem.getName() + "</h4><br/> <h3 style='display: inline-block'>Popis:</h3> <h4style='display: inline-block'>" + problem.getComment() + "</h4>");
+        } catch (Exception e) {
+            System.out.println("Problem s poslanim emailu");
+        }
         httpResponse.sendRedirect("/");
     }
 
