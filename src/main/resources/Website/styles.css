@@ -249,6 +249,13 @@ form option {
     height: 3rem;
 }
 
+form div {
+    display: flex;
+    flex-direction: row;
+    gap: 1%;
+    width: 100%;
+}
+
 ::-webkit-scrollbar {
     width: 1;
   }
