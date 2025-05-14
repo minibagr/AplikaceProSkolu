@@ -105,6 +105,35 @@ h1 {
     color: rgb(109, 109, 109);
 }
 
+#admin-holder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#admin-holder div {
+    width: 25%;
+    padding: 8px;
+    background-color: #1f1e1e;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    font-size: 1.2rem;
+    height: 5rem;
+}
+
+#admin-holder div button {
+    width: 25%;
+    background-color: blue;
+}
+
+#admin-holder div button:hover {
+    width: 25%;
+    background-color: red;
+}
+
+
 @media only screen and (max-width: 600px) {
     #important-stats div p {
         font-size: 0.8rem

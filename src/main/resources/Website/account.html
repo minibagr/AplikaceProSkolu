@@ -11,6 +11,11 @@
 <body>
     <nav>
         <div class="button">
+            <a href="index.html">
+                <img loading="lazy" decoding="async" src="Icons/icon_problem.svg">
+            </a>
+        </div>
+        <div class="button">
             <a href="main.html">
                 <img loading="lazy" decoding="async" src="Icons/icon_home7.svg">
             </a>
@@ -20,16 +25,12 @@
                 <img loading="lazy" decoding="async" src="Icons/icon_add.svg">
             </a>    
         </div>
-        <div class="button">
-            <a href="index.html">
-                <img loading="lazy" decoding="async" src="Icons/icon_problem.svg">
-            </a>
-        </div>
         <div class="button selected-tab">
-            <a>
+            <a href="account.html">
                 <img loading="lazy" decoding="async" src="./Icons/icon_profile.svg">
             </a>
         </div>
+    </nav>
     </nav>
     <div id="start">
         <div class="profile-banner">
@@ -53,9 +54,9 @@
                 <p>Dostáno problémů</p>
             </div>
             <div>
-                <button class="print-button">
+                <!--<button class="print-button">
                     <img class="img-printer" src="./img_printer.png">
-                </button>
+                </button>-->
             </div>
         </div>
         <h1>Informace</h1>
@@ -78,9 +79,16 @@
             </div>
         </div>
     </div>
+    <h1>Tisk dat</h1>
+    <div id="admin-holder">
+        <div> 
+            <div id="admin-name">Adam Nemec</div>
+            <button id="print-button">TISK <img class="img-printer" src="./img_printer.png"></button>
+        </div>
+    </div>
     <h1>Přidat uživatele</h1>
     <form>
-        <div>
+        <div class="form-row">
             <input placeholder="Zadej jmeno" minlength="4" type="text" required>
             <input placeholder="Zadej prijmeni" minlength="4" type="text" required>
         </div>
