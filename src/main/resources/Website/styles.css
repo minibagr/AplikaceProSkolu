@@ -2,7 +2,7 @@
 * {margin: 0;padding: 0;}
 
 :root {
-    --main-color: #252525;
+    --main-color: #222224;
     --secondary-color: #ddc136;
     --main-font: "Rubik", sans-serif;
 }
@@ -217,35 +217,35 @@ form {
 form input {
     color: white;
     border: 0;
-    background-color: #1f1e1e;
+    background-color: #161616;
     height: 3rem;
 }
 
 form textarea {
     color: white;
     border: 0;
-    background-color: #1f1e1e;
+    background-color: #161616;
     height: 6rem;
 }
 
 form button {
     color: white;
     border: 0;
-    background-color: #1f1e1e;
+    background-color: #161616;
     height: 3rem;
 }
 
 form select {
     color: white;
     border: 0;
-    background-color: #1f1e1e;
+    background-color: #161616;
     height: 3rem;
 }
 
 form option {
     color: white;
     border: 0;
-    background-color: #1f1e1e;
+    background-color: #161616;
     height: 3rem;
 }
 

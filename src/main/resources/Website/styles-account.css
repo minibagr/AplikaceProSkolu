@@ -1,33 +1,44 @@
 .profile-banner {
-    height: 35vh;
+    height: 30vh;
     width: 100%;
-    background-color: #1f1e1e;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     color: white;
     text-align: center;
+    user-select: none;
+}
+
+.profile-banner h2 {
+    padding: 8px;
 }
 
 form {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    width: 98.5%;
+    justify-self: center;
+    width: 50%;
     margin-bottom: 3rem;
+    padding: 16px;
+    height: 55vh;
 }
 
 form input {
-    width: 99%;
+    border-radius: 5px;
+    padding: 3px;
+    width: 100%;
 }
 
 form select {
     width: 100%;
+    padding: 3px;
 }
 
 form button {
     width: 100%;
+    padding: 3px;
 }
 
 .img-profile {
@@ -68,13 +79,15 @@ h1 {
     text-align: center;
     padding: 16px;
     font-size: 1.5rem;
+    margin-top: 3.5rem;
 }
 
 #udaje div {
     width: 50%;
-    height: 8rem;
+    height: 5rem;
     display: flex;
     align-items: center;
+    justify-content: center;
     flex-direction: column;
     flex-wrap: wrap;
 }
@@ -109,27 +122,39 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 0.15rem;
+    flex-wrap: wrap;
 }
 
 #admin-holder div {
-    width: 25%;
-    padding: 8px;
-    background-color: #1f1e1e;
+    background-color: rgb(22, 22, 22);
+    width: 20%;
+    height: 4.5rem;
+    background-color: 161616;
     display: flex;
+    padding: 8px;
     justify-content: space-between;
     align-items: center;
     color: white;
     font-size: 1.2rem;
-    height: 5rem;
 }
 
 #admin-holder div button {
-    width: 25%;
-    background-color: blue;
+    margin: 8px;
+    background-color: #ddc136;
+    width: 20%;
+    height: 100%;
+}
+
+#admin-holder div button img{
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
 }
 
 #admin-holder div button:hover {
-    width: 25%;
     background-color: red;
 }
 
